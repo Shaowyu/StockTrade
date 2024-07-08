@@ -25,6 +25,8 @@ def findHistoricMax(stock = ''):
     return max
 
 def shouldBuy(stock = ''):
+    potential = 20 * (findHistoricMax(stock) - api.get_latest_quote(stock)) / findHistoricMax(stock)
+    potentialFromNews = 
     return True
 
 def shouldSell(stock = ''):
