@@ -3,6 +3,9 @@ import requests
 import config
 import orderController
 import sys
+from datetime import date
+import datetime
+import pytz
 
 api = tradeapi.REST(
     key_id = config.ALPACA_KEY,
@@ -11,11 +14,14 @@ api = tradeapi.REST(
 )
 
 def findHistoricMax(stock = ''):
+    curDate = datetime.datetime.now(pytz.timezone('US/Eastern'))
+    lastYear = curDate - datetime.timedelta(days=365)
+
+    bars = api.get_bars(stock, '1Day', start = lastYear.isoformat(), end = None, limit = 365)
     max = -1
-    barset = api.get_barset(stock, 'day', limit = sys.maxint)
-    for data in barset:
-        if data > max:
-            max = data
+    for bar in bars:
+        if bar.c > max:
+            max = bar.c
     return max
 
 def shouldBuy(stock = ''):
@@ -33,4 +39,4 @@ def handleStock(stock = ''):
         return 1
     return 0
 
-
+print(findHistoricMax('AAPL'))
