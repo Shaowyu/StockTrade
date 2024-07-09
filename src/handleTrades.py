@@ -8,6 +8,7 @@ import datetime
 import pytz
 import openai
 
+
 openai.my_api_key = config.OPENAI_API_KEY
 messages = [ {"role": "system", "content": "You are a intelligent assistant."} ]
 
@@ -72,5 +73,6 @@ def handleStock(stock = ''):
         orderController.sellMarketOrder(stock)
         return 1
     return 0
+
 
 print(shouldBuy('AAPL'))
