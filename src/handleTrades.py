@@ -29,12 +29,40 @@ def findHistoricMax(stock = ''):
     return max
 
 def shouldBuy(stock = ''):
-    potential = 20 * (findHistoricMax(stock) - api.get_latest_quote(stock)) / findHistoricMax(stock)
-    potentialFromNews = 
-    return True
+    potential = 40 * (findHistoricMax(stock) - api.get_latest_quote(stock)) / findHistoricMax(stock)
+    
+    message = "From articles within the last week of" + stock + "rate how the company's stock will perform on a scale from 0 to 60. Please only respond with a number and nothing else."
+    messages.append( 
+            {"role": "user", "content": message}, 
+        ) 
+    chat = openai.ChatCompletion.create( 
+            model="gpt-3.5-turbo", messages=messages 
+        ) 
+    reply = chat.choices[0].message.content 
+    potentialFromNews = int(reply)
+    potential = potential + potentialFromNews
+
+    if potential > 70:
+        return True
+    return False
 
 def shouldSell(stock = ''):
-    return True
+    potential = 40 * (findHistoricMax(stock) - api.get_latest_quote(stock)) / findHistoricMax(stock)
+    
+    message = "From articles within the last week of" + stock + "rate how the company's stock will perform on a scale from 0 to 60. Please only respond with a number and nothing else."
+    messages.append( 
+            {"role": "user", "content": message}, 
+        ) 
+    chat = openai.ChatCompletion.create( 
+            model="gpt-3.5-turbo", messages=messages 
+        ) 
+    reply = chat.choices[0].message.content 
+    potentialFromNews = int(reply)
+    potential = potential + potentialFromNews
+    
+    if potential < 30:
+        return True
+    return False
 
 def handleStock(stock = ''):
     if shouldBuy(stock):
@@ -45,4 +73,4 @@ def handleStock(stock = ''):
         return 1
     return 0
 
-print(findHistoricMax('AAPL'))
+print(shouldBuy('AAPL'))
