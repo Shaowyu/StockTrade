@@ -1,7 +1,6 @@
 import alpaca_trade_api as tradeapi
 import requests
 import config
-from config import *
 
 
 ORDERS_URL = '{}/v2/orders'.format(config.APCA_API_BASE_URL)
