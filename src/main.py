@@ -1,43 +1,20 @@
 import alpaca_trade_api as tradeapi
 import requests
 import config
+from config import *
+import orderController
+
+print("Would you like to buy or sell a stock?")
+type = input()
+while type != 'buy' or type != 'sell':
+    print("Error, please enter either 'buy' or 'sell'")
+    type = input()
+    if type == 'buy' or type == 'sell':
+        break
+print("Please enter the ticker symbol for the stock you would like to buy: ")
+stock = input()
+orderController.createMarketOrder(stock)
 
 
-ORDERS_URL = '{}/v2/orders'.format(config.APCA_API_BASE_URL)
 
-def createMarketOrder():
-    ticker = 'AAPL'
-    qty = '2'
-    side = 'buy'
-    ordertype = 'market'
 
-    data = {
-        'symbol' : ticker,
-        'qty' : qty,
-        'side' : side,
-        'type' : ordertype,
-        'time_in_force' : 'day'
-    }
-
-    r = requests.post(ORDERS_URL, json=data, headers=config.HEADERS)
-    return r.content
-
-def createLimitOrder():
-    ticker = 'AAPL'
-    qty = '2'
-    side = 'buy'
-    ordertype = 'market'
-    limitPrice = '140'
-
-    data = {
-        'symbol' : ticker,
-        'qty' : qty,
-        'side' : side,
-        'type' : ordertype,
-        'time_in_force' : 'day',
-        'limit_price' : limitPrice
-    }
-
-    r = requests.post(ORDERS_URL, json=data, headers=config.HEADERS)
-    return r.content
-print(createMarketOrder())
