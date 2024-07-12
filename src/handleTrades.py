@@ -30,7 +30,7 @@ def findHistoricMax(stock = ''):
     return max
 
 def shouldBuy(stock = ''):
-    potential = 40 * (findHistoricMax(stock) - api.get_latest_quote(stock)) / findHistoricMax(stock)
+    potential = 40 * (findHistoricMax(stock) - api.get_latest_quote(stock).bp) / findHistoricMax(stock)
     
     message = "From articles within the last week of" + stock + "rate how the company's stock will perform on a scale from 0 to 60. Please only respond with a number and nothing else."
     messages.append( 
@@ -48,7 +48,7 @@ def shouldBuy(stock = ''):
     return False
 
 def shouldSell(stock = ''):
-    potential = 40 * (findHistoricMax(stock) - api.get_latest_quote(stock)) / findHistoricMax(stock)
+    potential = 40 * (findHistoricMax(stock) - api.get_latest_quote(stock).bp) / findHistoricMax(stock)
     
     message = "From articles within the last week of" + stock + "rate how the company's stock will perform on a scale from 0 to 60. Please only respond with a number and nothing else."
     messages.append( 
