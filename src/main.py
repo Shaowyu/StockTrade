@@ -13,7 +13,10 @@ while type != 'buy' or type != 'sell':
         break
 print("Please enter the ticker symbol for the stock you would like to buy: ")
 stock = input()
-orderController.createMarketOrder(stock)
+if type == 'buy':
+    orderController.createMarketOrder(stock)
+elif type == 'sell':
+    orderController.sellMarketOrder(stock)
 
 
 

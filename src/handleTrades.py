@@ -9,7 +9,7 @@ import pytz
 import openai
 
 
-openai.my_api_key = config.OPENAI_API_KEY
+openai.api_key = config.OPENAI_API_KEY
 messages = [ {"role": "system", "content": "You are a intelligent assistant."} ]
 
 api = tradeapi.REST(
