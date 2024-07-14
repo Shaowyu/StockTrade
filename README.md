@@ -12,6 +12,11 @@ This program within the handleTrades.py file and config.py have logic that can b
 has been commented out as it it interferes with the program. The reason for this is because it requires the user's account to 
 have credits. However it can be uncommented out to utilize it.
 
+# Purpose
+
+The purpose of this program was to experiment with API's and learn how to use them in a real life scenario. From here this could
+potetially be added to something like an app where users can trade off of that to their accounts.
+
 # To Run
 
 In order to run this program, run the main.py file and enter the factors that it asks.
