@@ -22,7 +22,7 @@ def findHistoricMax(stock = ''):
     curDate = datetime.datetime.now(pytz.timezone('US/Eastern'))
     lastYear = curDate - datetime.timedelta(days=365)
 
-    bars = api.get_bars(stock, '1Day', start = lastYear.isoformat(), end = None, limit = 365)
+    bars = api.get_bars(symbol=stock, timeframe='1Day', start = lastYear.isoformat(), end = None, limit = 365)
     max = -1
     for bar in bars:
         if bar.c > max:
@@ -32,36 +32,36 @@ def findHistoricMax(stock = ''):
 def shouldBuy(stock = ''):
     potential = 40 * (findHistoricMax(stock) - api.get_latest_quote(stock).bp) / findHistoricMax(stock)
     
-    message = "From articles within the last week of" + stock + "rate how the company's stock will perform on a scale from 0 to 60. Please only respond with a number and nothing else."
-    messages.append( 
-            {"role": "user", "content": message}, 
-        ) 
-    chat = openai.ChatCompletion.create( 
-            model="gpt-3.5-turbo", messages=messages 
-        ) 
-    reply = chat.choices[0].message.content 
-    potentialFromNews = int(reply)
-    potential = potential + potentialFromNews
+    #message = "From articles within the last week of" + stock + "rate how the company's stock will perform on a scale from 0 to 60. Please only respond with a number and nothing else."
+    #messages.append( 
+    #        {"role": "user", "content": message}, 
+    #    ) 
+    #chat = openai.ChatCompletion.create( 
+    #        model="gpt-3.5-turbo", messages=messages 
+    #    ) 
+    #reply = chat.choices[0].message.content 
+    #potentialFromNews = int(reply)
+    #potential = potential + potentialFromNews
 
-    if potential > 70:
+    if potential > 7:
         return True
     return False
 
 def shouldSell(stock = ''):
     potential = 40 * (findHistoricMax(stock) - api.get_latest_quote(stock).bp) / findHistoricMax(stock)
     
-    message = "From articles within the last week of" + stock + "rate how the company's stock will perform on a scale from 0 to 60. Please only respond with a number and nothing else."
-    messages.append( 
-            {"role": "user", "content": message}, 
-        ) 
-    chat = openai.ChatCompletion.create( 
-            model="gpt-3.5-turbo", messages=messages 
-        ) 
-    reply = chat.choices[0].message.content 
-    potentialFromNews = int(reply)
-    potential = potential + potentialFromNews
+    #message = "From articles within the last week of" + stock + "rate how the company's stock will perform on a scale from 0 to 60. Please only respond with a number and nothing else."
+    #messages.append( 
+    #        {"role": "user", "content": message}, 
+    #    ) 
+    #chat = openai.ChatCompletion.create( 
+    #        model="gpt-3.5-turbo", messages=messages 
+    #    ) 
+    #reply = chat.choices[0].message.content 
+    #potentialFromNews = int(reply)
+    #potential = potential + potentialFromNews
     
-    if potential < 30:
+    if potential < 3:
         return True
     return False
 
@@ -73,6 +73,3 @@ def handleStock(stock = ''):
         orderController.sellMarketOrder(stock)
         return 1
     return 0
-
-
-print(shouldBuy('AAPL'))
