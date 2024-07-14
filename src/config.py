@@ -8,4 +8,4 @@ HEADERS = {
 
 APCA_API_BASE_URL = 'https://paper-api.alpaca.markets'
 
-OPENAI_API_KEY = 'sk-proj-gKQGVpIJjG4jM1CbIWMET3BlbkFJ8iLWUnLVQipRH8yJimTg'
+OPENAI_API_KEY = 'Your OPENAI Key'
