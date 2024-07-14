@@ -1,5 +1,5 @@
-ALPACA_SECRET_KEY = 'A2fPB2dWZuqRQLAOaa2YEZXxvrQaWJLd5AFOaxFq'
-ALPACA_KEY = 'PKZN9T5IWKS6Y6HYPUZ9'
+ALPACA_SECRET_KEY = 'Your Secret API Key'
+ALPACA_KEY = 'Your Secret Key'
 
 HEADERS = {
     'APCA-API-KEY-ID': ALPACA_KEY,
@@ -8,4 +8,4 @@ HEADERS = {
 
 APCA_API_BASE_URL = 'https://paper-api.alpaca.markets'
 
-OPENAI_API_KEY = 'sk-None-dmCMV3YNwyMYPGVdWaaLT3BlbkFJsR0gJWaDKKeDE8U0nCuk'
+OPENAI_API_KEY = 'Your Key'
